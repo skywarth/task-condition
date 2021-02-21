@@ -26,3 +26,14 @@ Route::group(['as' => 'frontend.'], function () {
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin'], function () {
     includeRouteFiles(__DIR__.'/backend/');
 });
+
+
+
+Route::prefix('tasks')->group(function () {
+    Route::get('/test', [\App\Http\Controllers\TaskController::class,'test']);
+    Route::get('/listAll', [\App\Http\Controllers\TaskController::class,'listAll']);
+});
+
+Route::resource('tasks', \App\Http\Controllers\TaskController::class);
+
+
