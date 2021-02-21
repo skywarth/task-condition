@@ -22,7 +22,28 @@ class Task extends Model
         /*'prerequisites',*/
     ];
 
+/*    public function scopeConditionTitles($query)
+    { //no need for scope, won't work this way
+        return $query->title;
+        //return $query->ConditionTasks->pluck("title")->all();
+    }*/
 
+    public function ConditionTitles()
+    {
+
+        return $this->ConditionTasks->pluck("title")->all();
+    }
+
+    public function ConditionTitlesString()
+    {
+
+        return implode(",",$this->ConditionTitles());
+    }
+
+    public function TaskType(){
+
+        return $this->belongsTo(TaskType::class);
+    }
 
     public function ConditionTasks()
     {
