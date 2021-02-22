@@ -28,6 +28,10 @@ class DatabaseSeeder extends Seeder
         $this->call(AuthSeeder::class);
         $this->call(AnnouncementSeeder::class);
 
+        /*Challange seeds*/
+        $this->call(CurrencySeeder::class);
+        /*Challange seeds*/
+
         Model::reguard();
     }
 }

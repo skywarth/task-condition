@@ -41,6 +41,7 @@ class UserSeeder extends Seeder
             ]);
         }
 
+
         $this->enableForeignKeys();
     }
 }

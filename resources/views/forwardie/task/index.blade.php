@@ -29,8 +29,8 @@
                         <td>{{$task->TaskType->name}}</td>
                         <td>
                             @if($task->wildcard_info !=null)
-                                @foreach ($task->wildcard_info as $info =>$key)
-                                    <b>{{ $key }}</b>: {{ $info }}<br />
+                                @foreach ($task->wildcard_info as $info =>$value)
+                                    <b>{{ $info }}</b>: {{ $value }}<br />
                                 @endforeach
                             @endif
 

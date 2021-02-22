@@ -52,8 +52,14 @@ class TaskController extends Controller
      */
     public function create()
     {
-        $taskTypes=TaskType::all();
+        $taskTypes=TaskType::all()->sortByDesc("id");
         $currencies=Currency::all();
+        return view("forwardie/task/create",["taskTypes"=>$taskTypes,"currencies"=>$currencies]);
+    }
+
+    public function addCondition()
+    {
+        $tasks=Task::all(); //no need for pagination nor lazy load. Can do em in actual projects
         return view("forwardie/task/create",["taskTypes"=>$taskTypes,"currencies"=>$currencies]);
     }
 
@@ -64,10 +70,30 @@ class TaskController extends Controller
      *
 
      * @param  Task  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Task $request)
+    public function store(Request $request)
     {
+        //have to do some different methods in order to apply both main and additional data
+
+        $additionalData=array();
+        parse_str($request->additional, $additionalData);
+
+
+
+
+        parse_str($request->mainData, $mainData);
+
+        $newTask= new Task();
+        $newTask->title=$mainData["title"];
+        $newTask->TaskType()->associate($mainData["task_type_id"]);
+
+
+        $newTask->wildcard_info=$additionalData;
+
+        $newTask->save();
+
         return response()
             ->json(true);
     }
