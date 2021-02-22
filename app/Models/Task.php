@@ -50,4 +50,23 @@ class Task extends Model
         return $this->belongsToMany(Task::class,'task_condition','origin_task_id','condition_task_id');
         //return $this->belongsToMany('App\Model\Task','task_condition','origin_task_id','condition_task_id');
     }
+
+
+
+    static function addIdToQuery($query, $org)
+    {
+        $query = $query->orWhere('origin_task_id', $org->id);
+        foreach ($org->ConditionTasks as $org)
+        {
+            $query = Task::addIdToQuery($query, $org);
+        }
+        return $query;
+    }
+
+    public function recursiveConditionTasks()
+    {
+        $query = $this->ConditionTasks();
+        $query = Task::addIdToQuery($query, $this);
+        return $query;
+    }
 }

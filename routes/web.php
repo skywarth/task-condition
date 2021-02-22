@@ -32,6 +32,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin'], f
 Route::prefix('tasks')->group(function () {
     Route::get('/test', [\App\Http\Controllers\TaskController::class,'test']);
     Route::get('/listAll', [\App\Http\Controllers\TaskController::class,'listAll']);
+    Route::get('/addCondition/{id}', [\App\Http\Controllers\TaskController::class,'addConditionView']);
+    Route::post('/addCondition', [\App\Http\Controllers\TaskController::class,'addCondition']);
 });
 
 Route::resource('tasks', \App\Http\Controllers\TaskController::class);

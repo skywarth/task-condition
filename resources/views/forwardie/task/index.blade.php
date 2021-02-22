@@ -10,6 +10,7 @@
             Task List
         </div>
         <div class="card-body">
+            <h2>Ordered by condition order</h2>
         <div class="table-responsive">
             <table class="table">
                 <thead>
@@ -19,6 +20,7 @@
                     <th scope="col">Type</th>
                     <th scope="col">Info</th>
                     <th scope="col">prerequisites</th>
+                    <th scope="col">action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -37,6 +39,7 @@
 
                         </td>
                         <td>{{$task->ConditionTitlesString()}}</td>
+                        <td><a href="{{"/tasks/addCondition/".$task->id}}" class="btn btn-info">Add prerequisites</a> </td>
                     </tr>
                 @endforeach
                 </tbody>
