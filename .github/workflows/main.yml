@@ -30,8 +30,13 @@ jobs:
         with:
           # Whether or not to use Psalm’s security analysis
           security_analysis: true
+          report_file: results.sarif
           # File for Psalm’s output
           # Whether or not Composer installs dev packages
           composer_require_dev: false
           # Whether or not the --ignore-platform-reqs flag is passed to Composer
           composer_ignore_platform_reqs: true
+      - name: Upload Security Analysis results to GitHub
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: results.sarif
